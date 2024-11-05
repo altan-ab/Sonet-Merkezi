@@ -26,10 +26,10 @@ export default function App() {
 
   function highlightText(line, wordInput) {
     if (wordInput) {
-      const lastLine = line.toLowerCase()
+      const lastLine = line.split(' ')
       const lastWord = wordInput.toLowerCase()
 
-      return line.split(' ').map((word) => {
+      return lastLine.map((word) => {
         if (word.toLowerCase() === lastWord) {
           return <span> {word}</span>
         } else {
