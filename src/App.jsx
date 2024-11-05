@@ -25,18 +25,15 @@ export default function App() {
   )
 
   function highlightText(line, wordInput) {
-    if (wordInput) {
-      const lastLine = line.split(' ')
-      const lastWord = wordInput.toLowerCase()
+    if (!wordInput) return line
 
-      return lastLine.map((word) => {
-        if (word.toLowerCase() === lastWord) {
-          return <span> {word}</span>
-        } else {
-          return `${word} `
-        }
-      })
-    } else line
+    const regex = new RegExp(`(${wordInput})`, 'gi') // 'gi' -> büyük/küçük harf duyarsız ve tüm eşleşmeleri bulur
+
+    const parts = line.split(regex)
+    // Kelimeleri bölüyoruz ve eşleşen kısmı ayrı bir eleman olarak alıyoruz
+    return parts.map((part, index) =>
+      regex.test(part) ? <span key={index}>{part}</span> : part
+    )
   }
 
   return (
